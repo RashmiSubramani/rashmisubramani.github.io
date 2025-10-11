@@ -1,21 +1,35 @@
-import React from "react"
-import TopNav from "./components/TopNav"
-import Home from "./components/Home"
-import About from "./components/About"
-import Experience from "./components/Experience"
-import ProjectsAndCertifications from "./components/ProjectsAndCertifications"
-import Contact from "./components/Contact"
-import "./style.css"
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Layout } from "./components";
+import {
+  HomePage,
+  AboutPage,
+  ExperiencePage,
+  SkillsPage,
+  ProjectsPage,
+  CertificationsPage,
+  ContactPage,
+} from "./pages";
+import { GlobalStyles } from "./styles/GlobalStyles";
+import "./styles/global.css";
 
 export default function Portfolio() {
-    return(
-        <div>
-            <TopNav />
-            <Home />
-            <About />
-            <Experience />
-            <ProjectsAndCertifications />
-            <Contact />
-        </div>
-    )
+  return (
+    <>
+      <GlobalStyles />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="skills" element={<SkillsPage />} />
+            <Route path="projects" element={<ProjectsPage />} />
+            <Route path="certifications" element={<CertificationsPage />} />
+            <Route path="experience" element={<ExperiencePage />} />
+            <Route path="contact" element={<ContactPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </>
+  );
 }
