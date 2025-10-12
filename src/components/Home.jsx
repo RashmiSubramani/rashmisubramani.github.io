@@ -277,7 +277,14 @@ export default function Home() {
             <Button $variant="primary" as={Link} to="/contact">
               Let's Connect
             </Button>
-            <Button $variant="outline" as="a" href="/resume.pdf" download>
+            <Button 
+              $variant="outline" 
+              as="a" 
+              href="/resume.pdf" 
+              download="Rashmi_Subramani_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaDownload style={{ marginRight: "0.5rem" }} />
               Get Resume
             </Button>
