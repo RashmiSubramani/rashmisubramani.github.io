@@ -50,18 +50,18 @@ const NavigationArrow = styled.button`
 `;
 
 const RightArrow = styled(NavigationArrow)`
-  right: 2rem;
+  right: 0.5rem;
 
   @media (max-width: 768px) {
-    right: 1rem;
+    right: 0.5rem;
   }
 `;
 
 const LeftArrow = styled(NavigationArrow)`
-  left: 2rem;
+  left: 0.5rem;
 
   @media (max-width: 768px) {
-    left: 1rem;
+    left: 0.5rem;
   }
 `;
 

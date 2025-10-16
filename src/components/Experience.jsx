@@ -58,7 +58,7 @@ const SectionTitle = styled.h2`
 
 const Timeline = styled.div`
   position: relative;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding-left: 60px;
 

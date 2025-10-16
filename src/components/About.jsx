@@ -75,7 +75,7 @@ const AboutContainer = styled.div`
   gap: 3rem;
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
