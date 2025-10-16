@@ -104,13 +104,14 @@ const SectionTitle = styled.h2`
 `;
 
 const CertificationCard = styled.div`
-  /* Always use dark theme for now to test */
   background: linear-gradient(
-    135deg,
-    rgba(30, 27, 75, 0.4) 0%,
-    rgba(55, 48, 163, 0.3) 100%
+    145deg,
+    rgba(40, 37, 85, 0.6) 0%,
+    rgba(30, 27, 75, 0.4) 25%,
+    rgba(55, 48, 163, 0.3) 75%,
+    rgba(45, 42, 95, 0.5) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
@@ -118,8 +119,16 @@ const CertificationCard = styled.div`
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(168, 85, 247, 0.1);
   backdrop-filter: blur(15px);
+
+  /* Embossed effect with multiple layered shadows */
+  box-shadow:
+    /* Outer glow */ 0 0 30px rgba(168, 85, 247, 0.15),
+    /* Main depth shadow */ 0 15px 35px rgba(0, 0, 0, 0.4),
+    /* Inner highlight (top-left) */ inset 2px 2px 8px rgba(255, 255, 255, 0.1),
+    /* Inner shadow (bottom-right) */ inset -2px -2px 8px rgba(0, 0, 0, 0.3),
+    /* Subtle border highlight */ inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    /* Subtle border shadow */ inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 
   &::before {
     content: "";
@@ -139,18 +148,70 @@ const CertificationCard = styled.div`
     border-radius: 20px;
   }
 
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
+  /* Enhanced embossed border */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 19px;
     background: linear-gradient(
-      135deg,
-      rgba(30, 27, 75, 0.6) 0%,
-      rgba(55, 48, 163, 0.4) 100%
+      145deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.15) 100%
     );
-    border-color: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+      /* Enhanced outer glow */ 0 0 40px rgba(168, 85, 247, 0.25),
+      /* Deeper main shadow */ 0 25px 50px rgba(0, 0, 0, 0.5);
+
+    /* Animated gradient border only */
+    border: 2px solid transparent;
+    background-image: linear-gradient(
+        145deg,
+        rgba(40, 37, 85, 0.6) 0%,
+        rgba(30, 27, 75, 0.4) 25%,
+        rgba(55, 48, 163, 0.3) 75%,
+        rgba(45, 42, 95, 0.5) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(59, 130, 246, 0.8) 0%,
+        rgba(168, 85, 247, 0.8) 25%,
+        rgba(34, 197, 94, 0.8) 50%,
+        rgba(251, 191, 36, 0.8) 75%,
+        rgba(59, 130, 246, 0.8) 100%
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 200% 200%;
+    animation: borderShine 3s ease-in-out infinite;
+  }
+
+  @keyframes borderShine {
+    0%,
+    100% {
+      background-position: 100% 100%, 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%, 100% 100%;
+    }
   }
 
   &:hover::before {
+    opacity: 1;
+  }
+
+  &:hover::after {
     opacity: 1;
   }
 `;
@@ -169,11 +230,41 @@ const CertificationIcon = styled.div`
   position: relative;
   z-index: 1;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  /* Embossed icon effect */
+  box-shadow:
+    /* Outer shadow for depth */ 0 8px 24px rgba(0, 0, 0, 0.3),
+    /* Inner highlight (top-left) */ inset 1px 1px 4px rgba(255, 255, 255, 0.3),
+    /* Inner shadow (bottom-right) */ inset -1px -1px 4px rgba(0, 0, 0, 0.3),
+    /* Subtle top border */ inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    /* Subtle bottom border */ inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+
+  /* Additional border highlight */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 11px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    pointer-events: none;
+  }
 
   ${CertificationCard}:hover & {
     transform: scale(1.08);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      /* Enhanced outer shadow */ 0 12px 32px rgba(0, 0, 0, 0.4),
+      /* Enhanced inner highlight */ inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+      /* Enhanced inner shadow */ inset -2px -2px 6px rgba(0, 0, 0, 0.4),
+      /* Brighter top border */ inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      /* Deeper bottom border */ inset 0 -2px 0 rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -189,11 +280,39 @@ const CertificationYear = styled.div`
   position: relative;
   z-index: 1;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+
+  /* Embossed badge effect */
+  box-shadow:
+    /* Outer glow */ 0 4px 12px rgba(59, 130, 246, 0.3),
+    /* Inner highlight */ inset 1px 1px 3px rgba(255, 255, 255, 0.3),
+    /* Inner shadow */ inset -1px -1px 3px rgba(0, 0, 0, 0.2),
+    /* Top border highlight */ inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+  /* Subtle inner border */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 1.4rem;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    pointer-events: none;
+  }
 
   ${CertificationCard}:hover & {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    box-shadow:
+      /* Enhanced glow */ 0 6px 16px rgba(59, 130, 246, 0.4),
+      /* Enhanced inner highlight */ inset 1px 1px 4px rgba(255, 255, 255, 0.4),
+      /* Enhanced inner shadow */ inset -1px -1px 4px rgba(0, 0, 0, 0.3),
+      /* Brighter top border */ inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 `;
 
